@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Library {
     Map<Integer,User> userList = new HashMap<Integer,User>(10);
-
+    Task currentTask;
 
 
 
