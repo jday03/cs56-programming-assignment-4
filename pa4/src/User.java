@@ -6,7 +6,7 @@ import java.util.Map;
  */
 abstract public class User {
 
-    Map <String,Object> userInfo = new HashMap<String, Object>();
+    protected Map <String,Object> userInfo = new HashMap<String, Object>();
 
 
     public User(String name, String email, String phoneNumber, int libraryId, int PIN, boolean blocked){

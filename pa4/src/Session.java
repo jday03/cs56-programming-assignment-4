@@ -1,3 +1,6 @@
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
+import java.util.Date;
 import java.util.Observer;
 
 /**
@@ -5,23 +8,18 @@ import java.util.Observer;
  */
 public class Session{
     User currentUser;
-
-    public Session(){
-        currentUser = login();
-
-        if(currentUser != null) {
-
-        }
-    }
-
-
-    public User login(){
-
-        System.out.println("Enter Student PIN:");
-        int PIN;
+    Date currentDate;
 
 
 
+
+    public Task beginSessionLogin(){
+
+        int ID = getID();
+        int PIN = getPIN();
+
+
+        return new LogInTask(PIN, ID);
 
     }
 
@@ -32,22 +30,15 @@ public class Session{
     }
 
 
-    public int getPin(User currentUser){
-        if(currentUser == null) {
-            System.out.println("User does not exist.");
-            return -999;
-        }
-        this.currentUser = currentUser;
+    public int getPIN(){
         System.out.println("Enter user PIN:");
         //GET PIN
-        int PIN;
+        int PIN = 0;
 
-
-
-
-
+        return PIN;
     }
 
+    public void setCurrentUser(User )
 
 
 }
