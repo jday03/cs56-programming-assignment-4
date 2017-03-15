@@ -14,31 +14,30 @@ public class Session{
 
 
     public Task beginSessionLogin(){
-
-        int ID = getID();
-        int PIN = getPIN();
-
-
-        return new LogInTask(PIN, ID);
+        return new LogInTask();
 
     }
 
-    public int getID(){
-        System.out.println("Enter Student ID:");
-        int ID = 0; // MUST GET INPUT.
-        return ID;
+
+
+    public void setCurrentUser(User set){
+        currentUser = set;
     }
 
 
-    public int getPIN(){
-        System.out.println("Enter user PIN:");
-        //GET PIN
-        int PIN = 0;
 
-        return PIN;
+    public Task getNextTask(){
+        displayMenu();
+        return null;
     }
 
-    public void setCurrentUser(User )
 
+    private void displayMenu(){
+        System.out.println("Main Menu:");
+        System.out.println(" ");
+        System.out.println("Please input the character of the action you wish to perform:");
+
+
+    }
 
 }
