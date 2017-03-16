@@ -17,6 +17,11 @@ public class Library {
     ArrayList< Book> bookCatalog = new ArrayList<Book>();
     Task currentTask;
 
+    final int HEADER_LINES= 3;
+    final String HEADER_ROW = "::::::::::";
+
+
+
     public Library(String fileName){
         File data = new File(fileName);
         Scanner reader;
@@ -35,6 +40,35 @@ public class Library {
 
 
 
+    }
+
+    private void readBooks(Scanner reader){
+        //getting past the first lines that is the header
+
+        for (int count = 0; count < HEADER_LINES; count++)
+            reader.nextLine();
+        String nextLine = reader.nextLine();
+
+        while(!(nextLine.equals(HEADER_ROW))){
+            readBook(reader, nextLine);
+
+        }
+
+    }
+
+    private Book readBook(Scanner reader, String firstLine){
+        BookClassification currentState = BookClassification.mainClassification;
+        Book newBook = BookFactory.createBook(currentState,firstLine);
+
+
+        while(currentState != BookClassification.mainClassification){
+            String nextLine = reader.nextLine();
+            currentState = currentState.next(currentState);
+
+
+        }
+
+        return newBook;
     }
 
     public User findUser(int ID){

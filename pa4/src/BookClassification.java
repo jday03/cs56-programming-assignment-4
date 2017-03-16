@@ -2,7 +2,7 @@
  * Created by JonathanDay4 on 3/15/2017.
  */
 public enum BookClassification {
-    a,b,c,d,e,f;
+    mainClassification,SubClassification,Serial_Number,Title,Author,Publisher,Year_Of_Publication, Copy_Number;
 
     public BookClassification next(BookClassification current){
         BookClassification [] values = BookClassification.values();
@@ -13,4 +13,7 @@ public enum BookClassification {
         else return values[current.ordinal() + 1];
 
     }
+
+
+
 }

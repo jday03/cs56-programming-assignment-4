@@ -4,8 +4,6 @@
 public class main {
     public static void main(String [] args){
 
-        BookClassification pack = BookClassification.a;
-
 
 
 

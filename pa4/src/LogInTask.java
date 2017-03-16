@@ -30,7 +30,6 @@ public class LogInTask implements Task{
     }
 
 
-
     private int getID(){
         System.out.println("Enter Student ID:");
         int ID = 0; // MUST GET INPUT.
