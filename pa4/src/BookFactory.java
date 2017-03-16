@@ -2,12 +2,20 @@
  * Created by JonathanDay4 on 3/15/2017.
  */
  public class BookFactory {
+    final static String BUFFER_CHARACTER = ".";
 
 
     static public Book createBook( BookClassification label, String firstLine){
-        final String BUFFER_CHARACTER = ".";
 
         Book newBook = new Book();
+        addMagicNumber(label,firstLine,newBook);
+
+        return newBook;
+    }
+
+
+
+    private static Book addMagicNumber(BookClassification label, String firstLine, Book newBook){
         int firstIndexOfDot = firstLine.indexOf(BUFFER_CHARACTER);
         int secondIndexOf = firstLine.indexOf(BUFFER_CHARACTER,firstIndexOfDot);
 
@@ -23,7 +31,6 @@
 
 
     }
-
     static public Book createBook( BookClassification label, String data, Book currentBook){
         return currentBook.addClassification(label,data);
     }
