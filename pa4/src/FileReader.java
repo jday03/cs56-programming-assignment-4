@@ -175,8 +175,8 @@ public class FileReader {
             String serialNumber = line.substring(startOfSerialNumber + 1, copyQuantityLocation);
             String copyNumber = line.substring(copyQuantityLocation + 1, separationBetweenMagicNumbers);
 
-            Book foundBook = Library.findBook(mainClassification, subClassification, serialNumber, bookCatalog);
-            foundBook.addClassification(BookClassification.Checked_Out_Date, date);
+            Book foundBook = Library.findBook(mainClassification, subClassification, serialNumber,copyNumber, bookCatalog);
+            foundBook.changeCheckOutDate( new Date( checkoutYear, checkoutMonth, checkoutDay));
             previousUser.checkOutBook(foundBook);
 
         } while (separationBetweenMagicNumbers != line.length() - 1);

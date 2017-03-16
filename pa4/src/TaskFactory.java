@@ -10,14 +10,12 @@ public class TaskFactory {
         switch(job){
             case 'c':
                 return new checkOutTask(sessionOwner,today);
-                break;
+
             case 't':
                 return new checkInTask(sessionOwner,today);
-                break;
 
-
-
-
+            default:
+                return new closeTask();
         }
 
     }

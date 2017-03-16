@@ -28,11 +28,25 @@ abstract public class User implements Observer {
 
 
 
-    public boolean checkOutBook(Book checkout){
+    public boolean checkOutBook(Book checkOut){
         if((booksCheckedOut.size() > booksAtATimeLimit) || (userInfo.get(UserData.Blocked) != null))
             return false;
-        booksCheckedOut.add(checkout);
+        booksCheckedOut.add(checkOut);
         return true;
+    }
+
+    public boolean bookIsCheckedOutByThisUser(Book test){
+        return booksCheckedOut.lastIndexOf(test) != -1;
+    }
+
+    public boolean checkInBook(Book checkIn){
+        if(booksCheckedOut.remove(checkIn))
+        return true;
+        else {
+
+            System.out.println("Book is not checked out by user.");
+            return false;
+        }
     }
 
     public boolean isWithinBookLimit(){
@@ -46,7 +60,7 @@ abstract public class User implements Observer {
 
 
     public void update(Observable o, Object arg){
-
+        System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number" + " and copy number " + arg.toString() + " has become available! Pick it up ASAP!");
 
     }
 

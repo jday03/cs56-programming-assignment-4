@@ -33,6 +33,11 @@ public class Book extends Observable{
     }
 
 
+    public void changeCheckOutDate(Date newDate){
+        checkOutDate = new Date(newDate);
+    }
+
+
     public boolean recall(Date currentDate){
         if(!(isCheckedIn())){
             dueDate = (new Date(currentDate)).changeDate(RECALL_TIME);
@@ -52,7 +57,30 @@ public class Book extends Observable{
     public boolean checkIn(){
         checkOutDate = null;
         dueDate = null;
-        //Observers tho.
+        notifyObservers(getFullCode());
         return true;
     }
+
+    public String getFullCode(){
+        String code;
+        code = getClassification(BookClassification.mainClassification).toString();
+        code.concat(".");
+        code.concat(getClassification(BookClassification.SubClassification).toString());
+        code.concat(".");
+        code.concat(getClassification(BookClassification.Serial_Number).toString());
+        code.concat(":");
+        code.concat(getClassification(BookClassification.Copy_Number).toString());
+
+        return code;
+    }
+
+
+    public void addWatcher(User watcher){
+        addObserver(watcher);
+
+    }
+
+
+
+
 }
