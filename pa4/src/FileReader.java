@@ -18,13 +18,13 @@ public class FileReader {
     final static String BLOCKED_TAG = "[Blocked]";
     final static String BOOKS_CHECKED_TAG = "/";
 
-    public static void readFile(String fileName, HashMap<Object,User> userList, ArrayList< Book> bookCatalog) {
+    public static void readFile(String fileName, HashMap<Object,User> userList, ArrayList<  Book> bookCatalog) {
         File data = new File(fileName);
         Scanner reader;
         try {
             reader = new Scanner(data);
             readBooks(reader, bookCatalog);
-            readUsers(reader,userList);
+            readUsers(reader,userList, bookCatalog);
 
         } catch (FileNotFoundException error) {
             System.out.println("Data file not found.");
@@ -70,20 +70,20 @@ public class FileReader {
     }
 
 
-    private static void readUsers(Scanner reader, HashMap<Object,User> userList){
+    private static void readUsers(Scanner reader, HashMap<Object,User> userList, ArrayList <Book> bookCatalog){
 
 
         String nextLine = reader.nextLine();
         while(reader.hasNextLine()) {
             switch (nextLine) {
                 case STUDENT_HEADER:
-                    readSection(reader, UserType.STUDENT, userList);
+                    readSection(reader, UserType.STUDENT, userList, bookCatalog);
                     break;
                 case GRAD_RESEARCH_HEADER:
-                    readSection(reader, UserType.GRADUATE_RESEARCHER, userList);
+                    readSection(reader, UserType.GRADUATE_RESEARCHER, userList, bookCatalog);
                     break;
                 case PROFESSOR_HEADER:
-                    readSection(reader, UserType.PROFESSOR, userList);
+                    readSection(reader, UserType.PROFESSOR, userList, bookCatalog);
                     break;
                 default:
                     nextLine = reader.nextLine();
@@ -93,7 +93,7 @@ public class FileReader {
     }
 
 
-    private static void readSection(Scanner reader, UserType type, HashMap<Object,User> userList){
+    private static void readSection(Scanner reader, UserType type, HashMap<Object,User> userList, ArrayList <Book> bookCatalog){
         String nextLine = reader.nextLine();
         while (nextLine.equals(HEADER_ROW)){
             nextLine = reader.nextLine();
@@ -106,7 +106,7 @@ public class FileReader {
             nextLine = reader.nextLine();
 
             if(nextLine.contains(BOOKS_CHECKED_TAG)){
-                addCheckedOutBooks(toAdd, nextLine);
+                addCheckedOutBooks(toAdd, nextLine, bookCatalog );
             } else
                 if(nextLine.contains(BLOCKED_TAG))
                     toAdd.addClassification(UserData.Blocked,true);
@@ -136,17 +136,57 @@ public class FileReader {
 
 
 
-    private static User addCheckedOutBooks(User previouisUser, String line){
-        int firstIndexOfSlash = line.indexOf("/");
-        int secondIndexOfSlash = line.indexOf("/",firstIndexOfSlash + 1);
-        int indexOfColon = line.indexOf(":");
+    private static User addCheckedOutBooks(User previousUser, String line, ArrayList <Book> bookCatalog){
+        int firstIndexOfSlash;
+        int secondIndexOfSlash;
+        int indexOfColon;
 
-        String checkoutYear = line.substring(0,firstIndexOfSlash);
-        String checkoutMonth = line.substring(firstIndexOfSlash + 1, secondIndexOfSlash);
-        String checkoutDay = line.substring(secondIndexOfSlash + 1, indexOfColon);
+        int startOfSubClassification;
+        int startOfSerialNumber;
+        int copyQuantityLocation;
+        int separationBetweenMagicNumbers;
+
+        int checkoutYear;
+        int checkoutMonth;
+        int checkoutDay;
+
+        do {
+
+            firstIndexOfSlash = line.indexOf("/");
+            secondIndexOfSlash = line.indexOf("/", firstIndexOfSlash + 1);
+            indexOfColon = line.indexOf(":");
+
+            checkoutYear = Integer.parseInt(line.substring(0, firstIndexOfSlash));
+            checkoutMonth = Integer.parseInt(line.substring(firstIndexOfSlash + 1, secondIndexOfSlash));
+            checkoutDay = Integer.parseInt(line.substring(secondIndexOfSlash + 1, indexOfColon));
+            int [] date = {checkoutYear, checkoutMonth, checkoutDay};
+
+            line = line.substring(indexOfColon + 1);
+
+            startOfSubClassification = line.indexOf(".");
+            startOfSerialNumber = line.indexOf(".", startOfSubClassification + 1);
+            copyQuantityLocation = line.indexOf(":");
+
+            separationBetweenMagicNumbers = line.indexOf(",");
+            separationBetweenMagicNumbers = (separationBetweenMagicNumbers >= 0) ? separationBetweenMagicNumbers : line.length() - 1;
+
+            String mainClassification = line.substring(1, startOfSubClassification);
+            String subClassification = line.substring(startOfSubClassification + 1, startOfSerialNumber);
+            String serialNumber = line.substring(startOfSerialNumber + 1, copyQuantityLocation);
+            String copyNumber = line.substring(copyQuantityLocation + 1, separationBetweenMagicNumbers);
+
+            Book foundBook = Library.findBook(mainClassification, subClassification, serialNumber, bookCatalog);
+            foundBook.addClassification(BookClassification.Checked_Out_Date, date);
+            previousUser.checkOutBook(foundBook);
+
+        } while (separationBetweenMagicNumbers != line.length() - 1);
 
         return null;
     }
+
+
+
+
 
 
 

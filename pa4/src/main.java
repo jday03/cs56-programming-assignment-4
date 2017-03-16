@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Created by JonathanDay4 on 3/15/2017.
  */
@@ -10,8 +12,15 @@ public class main {
     }
 
     public static void main(String [] args){
-        BookClassification sub = BookClassification.mainClassification;
-        addMagicNumber(sub);
-        System.out.println(sub);
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Enter a number: ");
+        int n = reader.nextInt();
+        System.out.println(n);
+
+        n = reader.nextInt();
+        System.out.println(n);
+
+        n = reader.nextInt();
+        System.out.println(n);
     }
 }

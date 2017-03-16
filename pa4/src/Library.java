@@ -34,4 +34,16 @@ public class Library {
     }
 
 
+    public static Book findBook(String mainClassification, String subClassification, String serialNumber, String copyNumber, ArrayList < Book> bookCatalog){
+        for (Book book : bookCatalog){
+            if(book.getClassification(BookClassification.mainClassification).equals(mainClassification)
+                    && book.getClassification(BookClassification.SubClassification).equals(subClassification)
+                    && book.getClassification(BookClassification.Serial_Number).equals(serialNumber)
+                    && book.getClassification(BookClassification.Copy_Number).equals(copyNumber))
+                return book;
+        }
+
+        return null;
+    }
+
 }

@@ -1,13 +1,18 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by JonathanDay4 on 3/14/2017.
  */
-public class LogInTask implements Task{
+public class LogInTask extends Task{
 
     public LogInTask(){
 
+    }
+
+    public LogInTask(User sessionOwner){
+        super(sessionOwner);
     }
 
     @Override
@@ -32,16 +37,14 @@ public class LogInTask implements Task{
 
     private int getID(){
         System.out.println("Enter Student ID:");
-        int ID = 0; // MUST GET INPUT.
-        return ID;
+        Scanner userInput = new Scanner(System.in);
+        return userInput.nextInt();
     }
 
 
     private int getPIN(){
         System.out.println("Enter user PIN:");
-        //GET PIN
-        int PIN = 0;
-
-        return PIN;
+        Scanner userInput = new Scanner(System.in);
+        return userInput.nextInt();
     }
 }
