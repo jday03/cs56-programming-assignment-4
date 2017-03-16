@@ -11,16 +11,16 @@ public class LogInTask implements Task{
     }
 
     @Override
-    public User executeTask(HashMap<Integer,User> Users, ArrayList<Book> bookCatalog){
-        int ID = getID();
-        int PIN = getPIN();
+    public User executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog){
+        Object ID = getID();
+        Object PIN = getPIN();
 
         User logInUser = Users.get(ID);
         if(logInUser == null) {
             System.out.println("There is no user with that ID.");
             return null;
         }
-        if(logInUser.getProperty("PIN").equals(PIN)){
+        if(logInUser.getProperty(UserData.ID).equals(PIN)){
 
             return logInUser;
         } else {

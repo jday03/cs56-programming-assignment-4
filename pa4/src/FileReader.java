@@ -116,8 +116,8 @@ public class FileReader {
             newUser = UserFactory.createUser(currentField,nextLine,newUser);
         }
 
-        if()
-
+        //if()
+return null;
     }
 
 

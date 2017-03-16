@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class closeTask implements Task {
 
     @Override
-    public Object executeTask(HashMap<Integer,User> Users, ArrayList<Book> bookCatalog){
+    public Object executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog){
         return null;
     }
 
