@@ -108,13 +108,15 @@ public class FileReader {
     private static User readUser(Scanner reader, UserType type, String nextLine){
         UserData currentField = UserData.firstItem();
         User newUser = UserFactory.createUser(type);
-
+        newUser = UserFactory.createUser(currentField,nextLine,newUser);
 
         while(currentField!= UserData.lastStableItem()){
             nextLine = reader.nextLine();
             currentField= currentField.next(currentField);
-
+            newUser = UserFactory.createUser(currentField,nextLine,newUser);
         }
+
+        if()
 
     }
 

@@ -5,7 +5,7 @@ public class UserFactory {
 
 
 
-    public User createUser(UserType occupation){
+    public static User createUser(UserType occupation){
 
         switch(occupation){
             case STUDENT:
@@ -22,7 +22,7 @@ public class UserFactory {
 
 
 
-    public User createUser(UserData data, String firstLine, User previousUser) {
+    public static User createUser(UserData data, String firstLine, User previousUser) {
         return previousUser.addClassification(data,firstLine);
     }
 
