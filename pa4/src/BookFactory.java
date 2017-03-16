@@ -5,23 +5,24 @@
     final static String BUFFER_CHARACTER = ".";
 
 
-    static public Book createBook( BookClassification label, String firstLine){
+    static public Book createBook( String firstLine){
 
         Book newBook = new Book();
-        addMagicNumber(label,firstLine,newBook);
+        addMagicNumber(firstLine,newBook);
 
         return newBook;
     }
 
 
 
-    private static Book addMagicNumber(BookClassification label, String firstLine, Book newBook){
+    private static Book addMagicNumber(String firstLine, Book newBook){
+        BookClassification label = BookClassification.mainClassification;
         int firstIndexOfDot = firstLine.indexOf(BUFFER_CHARACTER);
-        int secondIndexOf = firstLine.indexOf(BUFFER_CHARACTER,firstIndexOfDot);
+        int secondIndexOfDot = firstLine.indexOf(BUFFER_CHARACTER,firstIndexOfDot + 1);
 
         String firstPart = firstLine.substring(0, firstIndexOfDot);
-        String secondPart = firstLine.substring(firstIndexOfDot, secondIndexOf);
-        String thirdPart = firstLine.substring(firstIndexOfDot, firstLine.length());
+        String secondPart = firstLine.substring(firstIndexOfDot + 1, secondIndexOfDot);
+        String thirdPart = firstLine.substring(secondIndexOfDot + 1, firstLine.length() - 1);
 
         newBook.addClassification(label,firstPart);
         label = label.next(label);

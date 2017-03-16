@@ -15,6 +15,8 @@ public class FileReader {
     final static String STUDENT_HEADER = "Students";
     final static String GRAD_RESEARCH_HEADER= "Graduate Researchers";
     final static String PROFESSOR_HEADER = "Professors";
+    final static String BLOCKED_TAG = "[Blocked]";
+    final static String BOOKS_CHECKED_TAG = "/";
 
     public static void readFile(String fileName, HashMap<Object,User> userList, ArrayList< Book> bookCatalog) {
         File data = new File(fileName);
@@ -53,8 +55,10 @@ public class FileReader {
 
     private static Book readBook(Scanner reader, String firstLine){
         BookClassification currentField = BookClassification.firstItem();
-        Book newBook = BookFactory.createBook(currentField,firstLine);
 
+        Book newBook = BookFactory.createBook(firstLine);
+        currentField = currentField.next(currentField);
+        currentField = currentField.next(currentField);
 
         while(currentField!= BookClassification.lastStableItem()){
             String nextLine = reader.nextLine();
@@ -98,6 +102,18 @@ public class FileReader {
         while(!(nextLine.equals(HEADER_ROW)) && reader.hasNextLine()){
             User toAdd = readUser(reader,type,nextLine);
             userList.put(toAdd.getProperty(UserData.ID),toAdd);
+
+            nextLine = reader.nextLine();
+
+            if(nextLine.contains(BOOKS_CHECKED_TAG)){
+                addCheckedOutBooks(toAdd, nextLine);
+            } else
+                if(nextLine.contains(BLOCKED_TAG))
+                    toAdd.addClassification(UserData.Blocked,true);
+
+
+
+
         }
 
 
@@ -115,11 +131,22 @@ public class FileReader {
             currentField= currentField.next(currentField);
             newUser = UserFactory.createUser(currentField,nextLine,newUser);
         }
-
-        //if()
-return null;
+        return newUser;
     }
 
+
+
+    private static User addCheckedOutBooks(User previouisUser, String line){
+        int firstIndexOfSlash = line.indexOf("/");
+        int secondIndexOfSlash = line.indexOf("/",firstIndexOfSlash + 1);
+        int indexOfColon = line.indexOf(":");
+
+        String checkoutYear = line.substring(0,firstIndexOfSlash);
+        String checkoutMonth = line.substring(firstIndexOfSlash + 1, secondIndexOfSlash);
+        String checkoutDay = line.substring(secondIndexOfSlash + 1, indexOfColon);
+
+        return null;
+    }
 
 
 

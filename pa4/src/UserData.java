@@ -2,7 +2,7 @@
  * Created by JonathanDay4 on 3/15/2017.
  */
 public enum UserData {
-    ID,PIN, Name,Email, Phone_Number, Books_Checked_Out, Blocked, Return_Time_Limit, Books_At_A_Time_Limit;
+    ID,PIN, Name,Email, Phone_Number, Blocked, Return_Time_Limit, Books_At_A_Time_Limit, Books_Checked_Out;
 
     final static int ELEMENTS_NOT_STABLE= 2;
 

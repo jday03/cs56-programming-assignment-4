@@ -3,15 +3,15 @@
  */
 public class main {
 
-    public static void test(String tester){
-        tester = "yo wassup";
+    static BookClassification addMagicNumber(BookClassification label){
+        label = label.next(label);
+        return label;
+
     }
+
     public static void main(String [] args){
-        String hi = "ayo";
-        test(hi);
-        System.out.println(hi);
-
-
-
+        BookClassification sub = BookClassification.mainClassification;
+        addMagicNumber(sub);
+        System.out.println(sub);
     }
 }
