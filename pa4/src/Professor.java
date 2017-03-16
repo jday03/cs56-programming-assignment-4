@@ -5,10 +5,9 @@ public class Professor extends User{
     final int bookReturnTimeLimit = 30;
     final int booksAtATimeLimit = 20;
 
-    public Professor(String name, String email, String phoneNumber, int libraryId, int PIN, boolean blocked){
-        super(name, email, phoneNumber, libraryId, PIN, blocked);
+    public Professor(){
 
-        userInfo.put("bookReturnTimeLimit", bookReturnTimeLimit);
-        userInfo.put("booksAtATimeLimit", booksAtATimeLimit);
+        userInfo.put(UserData.Return_Time_Limit, bookReturnTimeLimit);
+        userInfo.put(UserData.Books_At_A_Time_Limit, booksAtATimeLimit);
     }
 }

@@ -27,7 +27,7 @@
         label = label.next(label);
         newBook.addClassification(label,secondPart);
         label = label.next(label);
-        return newBook.addClassification(label,firstPart);
+        return newBook.addClassification(label,thirdPart);
 
 
     }

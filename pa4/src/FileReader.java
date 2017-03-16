@@ -16,7 +16,7 @@ public class FileReader {
     final static String GRAD_RESEARCH_HEADER= "Graduate Researchers";
     final static String PROFESSOR_HEADER = "Professors";
 
-    public static void readFile(String fileName, HashMap<Integer,User> userList, ArrayList< Book> bookCatalog) {
+    public static void readFile(String fileName, HashMap<Object,User> userList, ArrayList< Book> bookCatalog) {
         File data = new File(fileName);
         Scanner reader;
         try {
@@ -33,7 +33,7 @@ public class FileReader {
 
 
 
-    private static void readBooks(Scanner reader,ArrayList< Book> bookCatalog ) {
+    private static void readBooks(Scanner reader, ArrayList< Book> bookCatalog ) {
         //getting past the first lines that is the header
 
         for (int count = 0; count < HEADER_LINES; count++){
@@ -52,7 +52,7 @@ public class FileReader {
 
 
     private static Book readBook(Scanner reader, String firstLine){
-        BookClassification currentField = BookClassification.mainClassification;
+        BookClassification currentField = BookClassification.firstItem();
         Book newBook = BookFactory.createBook(currentField,firstLine);
 
 
@@ -66,20 +66,20 @@ public class FileReader {
     }
 
 
-    private static void readUsers(Scanner reader, HashMap<Integer,User> userList){
+    private static void readUsers(Scanner reader, HashMap<Object,User> userList){
 
 
         String nextLine = reader.nextLine();
         while(reader.hasNextLine()) {
             switch (nextLine) {
                 case STUDENT_HEADER:
-                    readSection(reader, userType.STUDENT);
+                    readSection(reader, UserType.STUDENT, userList);
                     break;
                 case GRAD_RESEARCH_HEADER:
-                    readSection(reader, userType.GRADUATE_RESEARCHER);
+                    readSection(reader, UserType.GRADUATE_RESEARCHER, userList);
                     break;
                 case PROFESSOR_HEADER:
-                    readSection(reader, userType.PROFESSOR);
+                    readSection(reader, UserType.PROFESSOR, userList);
                     break;
                 default:
                     nextLine = reader.nextLine();
@@ -89,14 +89,32 @@ public class FileReader {
     }
 
 
-    private static void readSection(Scanner reader, userType type){
+    private static void readSection(Scanner reader, UserType type, HashMap<Object,User> userList){
         String nextLine = reader.nextLine();
         while (nextLine.equals(HEADER_ROW)){
             nextLine = reader.nextLine();
         }
 
+        while(!(nextLine.equals(HEADER_ROW)) && reader.hasNextLine()){
+            User toAdd = readUser(reader,type,nextLine);
+            userList.put(toAdd.getProperty(UserData.ID),toAdd);
+        }
 
 
+
+    }
+
+
+    private static User readUser(Scanner reader, UserType type, String nextLine){
+        UserData currentField = UserData.firstItem();
+        User newUser = UserFactory.createUser(type);
+
+
+        while(currentField!= UserData.lastStableItem()){
+            nextLine = reader.nextLine();
+            currentField= currentField.next(currentField);
+
+        }
 
     }
 

@@ -5,11 +5,10 @@ public class Student extends User {
     final int bookReturnTimeLimit = 20;
     final int booksAtATimeLimit = 10;
 
-    public Student (String name, String email, String phoneNumber, int libraryId, int PIN, boolean blocked){
-        super(name, email, phoneNumber, libraryId, PIN, blocked);
+    public Student (){
 
-        userInfo.put("bookReturnTimeLimit", bookReturnTimeLimit);
-        userInfo.put("booksAtATimeLimit", booksAtATimeLimit);
+        userInfo.put(UserData.Return_Time_Limit, bookReturnTimeLimit);
+        userInfo.put(UserData.Books_At_A_Time_Limit, booksAtATimeLimit);
     }
 
 

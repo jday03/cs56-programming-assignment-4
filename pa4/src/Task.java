@@ -5,5 +5,5 @@ import java.util.HashMap;
  * Created by JonathanDay4 on 3/14/2017.
  */
 public interface Task {
-    public Object executeTask(HashMap<Integer,User> Users, ArrayList<Book> bookCatalog);
+    public Object executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog);
 }

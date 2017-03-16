@@ -6,25 +6,22 @@ import java.util.Map;
  */
 abstract public class User {
 
-    protected Map <String,Object> userInfo = new HashMap<String, Object>();
+    protected Map <UserData,Object> userInfo = new HashMap<UserData, Object>();
 
 
-    public User(String name, String email, String phoneNumber, int libraryId, int PIN, boolean blocked){
-
-        userInfo.put("name", name);
-        userInfo.put("email", email);
-        userInfo.put("phonenumber", phoneNumber);
-        userInfo.put("ID", libraryId);
-        userInfo.put("PIN", PIN);
-        userInfo.put("blocked", blocked);
-
+    public User(){
 
     }
 
-    public Object getProperty(String property){
-        Object propertyToReturn = userInfo.getOrDefault(property, -300);
-        assert(!(propertyToReturn.equals(-300)));
-        return propertyToReturn;
+
+    public User addClassification(UserData label, Object data){
+        userInfo.put(label,data);
+        return this;
+    }
+
+
+    public Object getProperty(UserData data){
+        return userInfo.get(data);
     }
 
 }

@@ -5,11 +5,9 @@ public class GraduateResearcher extends User {
     final int bookReturnTimeLimit = 30;
     final int booksAtATimeLimit = 15;
 
-    public GraduateResearcher(String name, String email, String phoneNumber, int libraryId, int PIN, boolean blocked){
-        super(name, email, phoneNumber, libraryId, PIN, blocked);
-
-        userInfo.put("bookReturnTimeLimit", bookReturnTimeLimit);
-        userInfo.put("booksAtATimeLimit", booksAtATimeLimit);
+    public GraduateResearcher(){
+        userInfo.put(UserData.Return_Time_Limit, bookReturnTimeLimit);
+        userInfo.put(UserData.Books_At_A_Time_Limit, booksAtATimeLimit);
     }
 
 }

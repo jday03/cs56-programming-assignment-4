@@ -3,18 +3,32 @@
  */
 public class UserFactory {
 
-    public User addUser(String name, String email, String phoneNumber, int libraryID, int PIN,userType type, boolean blocked){
 
-        switch(type){
+
+    public User createUser(UserType occupation){
+
+        switch(occupation){
             case STUDENT:
-                return new Student(name,email,phoneNumber,libraryID,PIN,blocked);
+                return new Student();
             case GRADUATE_RESEARCHER:
-                return new GraduateResearcher(name,email,phoneNumber,libraryID,PIN,blocked);
+                return new GraduateResearcher();
             case PROFESSOR:
-                return new Professor(name,email,phoneNumber,libraryID,PIN,blocked);
+                return new Professor();
+            default:
+                return null;
         }
-        return null;
+
     }
+
+
+
+    public User createUser(UserData data, String firstLine, User previousUser) {
+        return previousUser.addClassification(data,firstLine);
+    }
+
+
+
+
 
 
 

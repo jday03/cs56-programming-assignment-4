@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Created by JonathanDay4 on 3/13/2017.
  */
 public class Library {
-    HashMap<Integer,User> userList = new HashMap<Integer,User>(10);
+    HashMap<Object,User> userList = new HashMap<Object,User>(10);
     ArrayList< Book> bookCatalog = new ArrayList<Book>(10);
 
 
