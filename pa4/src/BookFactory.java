@@ -22,7 +22,7 @@
 
         String firstPart = firstLine.substring(0, firstIndexOfDot);
         String secondPart = firstLine.substring(firstIndexOfDot + 1, secondIndexOfDot);
-        String thirdPart = firstLine.substring(secondIndexOfDot + 1, firstLine.length() - 1);
+        String thirdPart = firstLine.substring(secondIndexOfDot + 1, firstLine.length());
 
         newBook.addClassification(label,firstPart);
         label = label.next(label);

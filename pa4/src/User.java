@@ -8,11 +8,12 @@ abstract public class User implements Observer {
     protected Map <UserData,Object> userInfo = new HashMap<UserData, Object>();
     protected ArrayList< Book> booksCheckedOut = new ArrayList<Book>(10);
 
-    final int bookReturnTimeLimit = 5;
-    final int booksAtATimeLimit = 5;
+    final int bookReturnTimeLimit;
+    final int booksAtATimeLimit;
 
-    public User(){
-
+    public User(int bookReturnTimeLimit, int booksAtATimeLimit){
+        this.bookReturnTimeLimit = bookReturnTimeLimit;
+        this.booksAtATimeLimit = booksAtATimeLimit;
     }
 
 
@@ -60,7 +61,13 @@ abstract public class User implements Observer {
 
 
     public void update(Observable o, Object arg){
-        System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number" + " and copy number " + arg.toString() + " has become available! Pick it up ASAP!");
+        Message parcel = (Message) arg;
+        if(parcel == Message.OWNER && bookIsCheckedOutByThisUser(parcel.book)){
+            System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has been recalled. Please return by: " + parcel.message);
+        }
+
+        if(parcel == Message.NOT_OWNER && parcel.book.isCheckedIn())
+            System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has become available! Pick it up ASAP!");
 
     }
 

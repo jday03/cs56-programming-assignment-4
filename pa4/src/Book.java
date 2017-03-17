@@ -17,9 +17,14 @@ public class Book extends Observable{
         return this;
     }
 
+
+
+
     public Object getClassification(BookClassification bookClass){
         return classifications.get(bookClass);
     }
+
+
 
     public Date checkOut(Date currentDate, int lengthOfCheckOut){
         if(checkOutDate != null)
@@ -41,6 +46,11 @@ public class Book extends Observable{
     public boolean recall(Date currentDate){
         if(!(isCheckedIn())){
             dueDate = (new Date(currentDate)).changeDate(RECALL_TIME);
+            Message parcel = Message.OWNER;
+            parcel.book = this;
+            parcel.message = dueDate.stringForm();
+            notifyObservers(parcel);
+
             return true;
         } else {
             return false;
@@ -54,12 +64,17 @@ public class Book extends Observable{
     }
 
 
+
+
+
     public boolean checkIn(){
         checkOutDate = null;
         dueDate = null;
         notifyObservers(getFullCode());
         return true;
     }
+
+
 
     public String getFullCode(){
         String code;
@@ -77,6 +92,11 @@ public class Book extends Observable{
 
     public void addWatcher(User watcher){
         addObserver(watcher);
+
+    }
+
+    public void removeWatcher(User watcher){
+        deleteObserver(watcher);
 
     }
 

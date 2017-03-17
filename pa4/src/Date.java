@@ -29,6 +29,10 @@ public class Date {
         date[2] = day;
     }
 
+    public String stringForm(){
+        return date[0] + " / "+ date[1] + " / " + date[2];
+    }
+
     public Date changeDate(int days){
         for( ; days < 0; days++) {
             if(date[2] == 0) {

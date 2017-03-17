@@ -12,15 +12,6 @@ public class main {
     }
 
     public static void main(String [] args){
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        System.out.println("Enter a number: ");
-        int n = reader.nextInt();
-        System.out.println(n);
-
-        n = reader.nextInt();
-        System.out.println(n);
-
-        n = reader.nextInt();
-        System.out.println(n);
+        Library test = new Library("./pa4/src/Library.data");
     }
 }

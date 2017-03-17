@@ -73,8 +73,9 @@ public class FileReader {
     private static void readUsers(Scanner reader, HashMap<Object,User> userList, ArrayList <Book> bookCatalog){
 
 
-        String nextLine = reader.nextLine();
+
         while(reader.hasNextLine()) {
+            String nextLine = reader.nextLine();
             switch (nextLine) {
                 case STUDENT_HEADER:
                     readSection(reader, UserType.STUDENT, userList, bookCatalog);
@@ -85,8 +86,7 @@ public class FileReader {
                 case PROFESSOR_HEADER:
                     readSection(reader, UserType.PROFESSOR, userList, bookCatalog);
                     break;
-                default:
-                    nextLine = reader.nextLine();
+
 
             }
         }
@@ -107,10 +107,17 @@ public class FileReader {
 
             if(nextLine.contains(BOOKS_CHECKED_TAG)){
                 addCheckedOutBooks(toAdd, nextLine, bookCatalog );
-            } else
-                if(nextLine.contains(BLOCKED_TAG))
-                    toAdd.addClassification(UserData.Blocked,true);
+                if(reader.hasNextLine())
+                    nextLine = reader.nextLine();
 
+            }
+            if(nextLine.contains(BLOCKED_TAG)) {
+                toAdd.addClassification(UserData.Blocked, true);
+                nextLine = reader.nextLine();
+                if(reader.hasNextLine())
+                    nextLine = reader.nextLine();
+
+            }
 
 
 
@@ -144,13 +151,14 @@ public class FileReader {
         int startOfSubClassification;
         int startOfSerialNumber;
         int copyQuantityLocation;
-        int separationBetweenMagicNumbers;
+        int separationBetweenMagicNumbers = -1;
 
         int checkoutYear;
         int checkoutMonth;
         int checkoutDay;
 
         do {
+            line = line.substring(separationBetweenMagicNumbers + 1);
 
             firstIndexOfSlash = line.indexOf("/");
             secondIndexOfSlash = line.indexOf("/", firstIndexOfSlash + 1);
@@ -168,9 +176,9 @@ public class FileReader {
             copyQuantityLocation = line.indexOf(":");
 
             separationBetweenMagicNumbers = line.indexOf(",");
-            separationBetweenMagicNumbers = (separationBetweenMagicNumbers >= 0) ? separationBetweenMagicNumbers : line.length() - 1;
+            separationBetweenMagicNumbers = (separationBetweenMagicNumbers >= 0) ? separationBetweenMagicNumbers : line.length();
 
-            String mainClassification = line.substring(1, startOfSubClassification);
+            String mainClassification = line.substring(0, startOfSubClassification);
             String subClassification = line.substring(startOfSubClassification + 1, startOfSerialNumber);
             String serialNumber = line.substring(startOfSerialNumber + 1, copyQuantityLocation);
             String copyNumber = line.substring(copyQuantityLocation + 1, separationBetweenMagicNumbers);
@@ -179,7 +187,9 @@ public class FileReader {
             foundBook.changeCheckOutDate( new Date( checkoutYear, checkoutMonth, checkoutDay));
             previousUser.checkOutBook(foundBook);
 
-        } while (separationBetweenMagicNumbers != line.length() - 1);
+            int test = line.length(); //16
+
+        } while (separationBetweenMagicNumbers != line.length());
 
         return null;
     }
