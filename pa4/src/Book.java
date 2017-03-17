@@ -44,7 +44,7 @@ public class Book extends Observable{
             checkOutDate = new Date(currentDate);
             dueDate = new Date(checkOutDate);
             dueDate.changeDate(lengthOfCheckOut);
-            return null;
+            return dueDate;
         }
     }
 
@@ -90,12 +90,12 @@ public class Book extends Observable{
     public String getFullCode(){
         String code;
         code = getClassification(BookClassification.mainClassification).toString();
-        code.concat(".");
-        code.concat(getClassification(BookClassification.SubClassification).toString());
-        code.concat(".");
-        code.concat(getClassification(BookClassification.Serial_Number).toString());
-        code.concat(":");
-        code.concat(getClassification(BookClassification.Copy_Number).toString());
+        code = code.concat(".");
+        code = code.concat(getClassification(BookClassification.SubClassification).toString());
+        code = code.concat(".");
+        code = code.concat(getClassification(BookClassification.Serial_Number).toString());
+        code = code.concat(":");
+        code = code.concat(getClassification(BookClassification.Copy_Number).toString());
 
         return code;
     }
@@ -108,6 +108,36 @@ public class Book extends Observable{
 
     public void removeWatcher(User watcher){
         deleteObserver(watcher);
+
+    }
+
+
+    public void printBookData(){
+        BookClassification lastItem = BookClassification.lastStableItem();
+        System.out.println("----------");
+        for (BookClassification classification = BookClassification.firstItem(); classification != lastItem; classification = classification.next(classification)){
+            System.out.println(classification + ": " + classifications.get(classification));
+        }
+
+
+
+    }
+
+
+
+    public boolean sameSpec(Book book){
+        BookClassification lastItem = BookClassification.lastStableItem();
+
+        if(lastItem != BookClassification.Copy_Number && !(classifications.get(lastItem).equals(book.getClassification(lastItem))))
+            return false;
+
+        for (BookClassification classification = BookClassification.firstItem(); classification != lastItem; classification = classification.next(classification)){
+            if(classification != BookClassification.Copy_Number && !(classifications.get(classification).equals(book.getClassification(classification))))
+                return false;
+
+        }
+
+        return true;
 
     }
 

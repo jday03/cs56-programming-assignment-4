@@ -52,7 +52,7 @@ public class Date {
             return false;
 
 
-        System.out.println("Date comparrison error");
+        System.out.println("Date comparison error");
         return false;
 
     }

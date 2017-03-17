@@ -14,6 +14,12 @@ public class TaskFactory {
                 return new checkInTask(sessionOwner,today);
             case 'r':
                 return new RecallTask(sessionOwner,today);
+            case 's':
+                return new SearchTask(sessionOwner,today);
+            case 'd':
+                return new BookSpecTask(sessionOwner,today);
+            case 'u':
+                return new DisplayUserInfoTask(sessionOwner,today);
 
             default:
                 return new closeTask();

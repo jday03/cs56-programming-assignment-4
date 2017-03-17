@@ -22,6 +22,8 @@ public class Session{
          LogInTask logInDevice = new LogInTask(currentUser, Users, bookCatalog);
          currentUser = logInDevice.logIn();
          if(currentUser != null){
+             System.out.println("You have been logged in successfully...");
+             System.out.println(" ");
              currentDate = logInDevice.getDate();
          }
          return logInDevice;
@@ -48,6 +50,9 @@ public class Session{
         System.out.println("C: Check out a book.");
         System.out.println("T: Return a book.");
         System.out.println("R: Recall a book.");
+        System.out.println("S: Search for a book using a keyword.");
+        System.out.println("D: Display a book based on its magic number.");
+        System.out.println("U: Display user info.");
         System.out.println("    ");
 
         Scanner reader = new Scanner(System.in);

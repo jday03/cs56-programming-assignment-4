@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class LogInTask extends Task{
     HashMap<String,User> usersList;
     ArrayList<Book> bookList;
-    User logInUser;
 
     public LogInTask(User sessionOwner, HashMap<String,User> Users, ArrayList<Book> bookCatalog){
         super(sessionOwner, new Date(0,0,0));
@@ -20,7 +19,7 @@ public class LogInTask extends Task{
 
     @Override
     public User executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog){
-        return logInUser;
+        return currentUser;
     }
 
 
@@ -44,11 +43,11 @@ public class LogInTask extends Task{
         String ID = getID();
         String PIN = getPIN();
 
-        logInUser = usersList.get(ID);
+        User logInUser = usersList.get(ID);
 
 
         if(logInUser != null && logInUser.getProperty(UserData.PIN).toString().equals(PIN)){
-
+            currentUser = logInUser;
             return logInUser;
         } else {
             System.out.println("PIN or ID is incorrect.");
