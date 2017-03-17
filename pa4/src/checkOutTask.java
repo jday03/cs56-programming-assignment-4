@@ -9,11 +9,12 @@ import java.util.Scanner;
 public class checkOutTask extends Task {
 
     public checkOutTask(User sessionOwner, Date today) {
-        super(sessionOwner);
+        super(sessionOwner,today);
+
     }
 
     @Override
-    public Boolean executeTask(HashMap<Object, User> Users, ArrayList<Book> bookCatalog) {
+    public Boolean executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog){
         Book checkOut = getBook(bookCatalog);
 
         if (checkOut == null) {
@@ -42,6 +43,7 @@ public class checkOutTask extends Task {
             dueDate.print();
             removeWatchers(checkOut, bookCatalog);
             checkOut.addWatcher(currentUser);
+            System.out.println("You have successfully checked out: " + checkOut.getFullCode());
             return true;
         } else {
             return false;

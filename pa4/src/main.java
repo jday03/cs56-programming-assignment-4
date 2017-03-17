@@ -12,6 +12,8 @@ public class main {
     }
 
     public static void main(String [] args){
+
         Library test = new Library("./pa4/src/Library.data");
+        test.runSession();
     }
 }

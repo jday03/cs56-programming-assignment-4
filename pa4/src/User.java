@@ -72,4 +72,9 @@ abstract public class User implements Observer {
     }
 
 
+    public ArrayList< Book> getBookList(){
+        return booksCheckedOut;
+    }
+
+
 }

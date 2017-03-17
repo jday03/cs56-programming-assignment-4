@@ -12,7 +12,7 @@ public class closeTask extends Task {
 
 
     @Override
-    public Object executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog)
+    public Object executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog)
     {
         return null;
     }

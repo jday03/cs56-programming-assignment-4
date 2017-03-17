@@ -7,11 +7,11 @@ import java.util.Scanner;
  */
 public class RecallTask extends Task{
     public RecallTask(User sessionOwner, Date today){
-        super(sessionOwner);
+        super(sessionOwner,today);
     }
 
     @Override
-    public Boolean executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog){
+    public Boolean executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog){
         ArrayList <Book> books= getBooks(bookCatalog);
         ArrayList<Book> candidates = (ArrayList<Book> ) books.clone();
         books = checkedInCopies(books);

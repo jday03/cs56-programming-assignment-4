@@ -10,7 +10,8 @@ public abstract class Task {
     protected User currentUser;
     protected Date today;
 
-    public Task(User sessionOwner){
+    public Task(User sessionOwner, Date currentDay){
+        today = currentDay;
         currentUser = sessionOwner;
     }
 
@@ -19,7 +20,7 @@ public abstract class Task {
     }
 
 
-    public abstract Object executeTask(HashMap<Object,User> Users, ArrayList<Book> bookCatalog);
+    public abstract Object executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog);
 
 
 

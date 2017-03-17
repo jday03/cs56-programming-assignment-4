@@ -1,5 +1,7 @@
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observer;
 import java.util.Scanner;
 
@@ -11,11 +13,18 @@ public class Session{
     Date currentDate;
 
 
+    public Date getDate(){
+        return currentDate;
+    }
 
 
-    public Task beginSessionLogin(){
-        return new LogInTask();
-
+    public Task beginSessionLogin(HashMap<String,User> Users, ArrayList<Book> bookCatalog){
+         LogInTask logInDevice = new LogInTask(currentUser, Users, bookCatalog);
+         currentUser = logInDevice.logIn();
+         if(currentUser != null){
+             currentDate = logInDevice.getDate();
+         }
+         return logInDevice;
     }
 
 

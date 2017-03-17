@@ -18,7 +18,7 @@ public class FileReader {
     final static String BLOCKED_TAG = "[Blocked]";
     final static String BOOKS_CHECKED_TAG = "/";
 
-    public static void readFile(String fileName, HashMap<Object,User> userList, ArrayList<  Book> bookCatalog) {
+    public static void readFile(String fileName, HashMap<String,User> userList, ArrayList<  Book> bookCatalog) {
         File data = new File(fileName);
         Scanner reader;
         try {
@@ -70,7 +70,7 @@ public class FileReader {
     }
 
 
-    private static void readUsers(Scanner reader, HashMap<Object,User> userList, ArrayList <Book> bookCatalog){
+    private static void readUsers(Scanner reader, HashMap<String,User> userList, ArrayList <Book> bookCatalog){
 
 
 
@@ -93,7 +93,7 @@ public class FileReader {
     }
 
 
-    private static void readSection(Scanner reader, UserType type, HashMap<Object,User> userList, ArrayList <Book> bookCatalog){
+    private static void readSection(Scanner reader, UserType type, HashMap<String,User> userList, ArrayList <Book> bookCatalog){
         String nextLine = reader.nextLine();
         while (nextLine.equals(HEADER_ROW)){
             nextLine = reader.nextLine();
@@ -101,7 +101,7 @@ public class FileReader {
 
         while(!(nextLine.equals(HEADER_ROW)) && reader.hasNextLine()){
             User toAdd = readUser(reader,type,nextLine);
-            userList.put(toAdd.getProperty(UserData.ID),toAdd);
+            userList.put(toAdd.getProperty(UserData.ID).toString(),toAdd);
 
             nextLine = reader.nextLine();
 
@@ -113,7 +113,6 @@ public class FileReader {
             }
             if(nextLine.contains(BLOCKED_TAG)) {
                 toAdd.addClassification(UserData.Blocked, true);
-                nextLine = reader.nextLine();
                 if(reader.hasNextLine())
                     nextLine = reader.nextLine();
 
@@ -184,7 +183,11 @@ public class FileReader {
             String copyNumber = line.substring(copyQuantityLocation + 1, separationBetweenMagicNumbers);
 
             Book foundBook = Library.findBook(mainClassification, subClassification, serialNumber,copyNumber, bookCatalog);
-            foundBook.changeCheckOutDate( new Date( checkoutYear, checkoutMonth, checkoutDay));
+            Date checkOutDate = new Date( checkoutYear, checkoutMonth, checkoutDay);
+            foundBook.changeCheckOutDate( checkOutDate);
+            Date dueDate = new Date (checkOutDate);
+            dueDate.changeDate(previousUser.bookReturnTimeLimit);
+            foundBook.setDueDate(dueDate);
             previousUser.checkOutBook(foundBook);
 
             int test = line.length(); //16

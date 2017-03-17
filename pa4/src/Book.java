@@ -19,6 +19,17 @@ public class Book extends Observable{
 
 
 
+    public Date getDueDate(){
+        return dueDate;
+    }
+
+
+    public void setDueDate(Date set){
+        dueDate = set;
+    }
+
+
+
 
     public Object getClassification(BookClassification bookClass){
         return classifications.get(bookClass);
