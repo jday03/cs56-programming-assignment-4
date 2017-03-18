@@ -20,9 +20,13 @@ public class TaskFactory {
                 return new BookSpecTask(sessionOwner,today);
             case 'u':
                 return new DisplayUserInfoTask(sessionOwner,today);
-
+            case 'w':
+                return new WaitTask(sessionOwner,today);
+            case 'l':
+                return new LogOutTask(sessionOwner,today);
             default:
-                return new closeTask();
+                System.out.println("Invalid input. Try again.");
+                return new ReShowMenuTask(sessionOwner, today);
         }
 
     }

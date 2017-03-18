@@ -63,7 +63,7 @@ public class SearchTask extends Task {
 
         foundBook.printBookData();
 
-        System.out.println(count + ((count == 1)?" copy available":" copies available."));
+        System.out.println(count + ((count == 1)?" copy in system":" copies in system."));
 
         return count - 1;
 

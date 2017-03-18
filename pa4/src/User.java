@@ -63,11 +63,11 @@ abstract public class User implements Observer {
     public void update(Observable o, Object arg){
         Message parcel = (Message) arg;
         if(parcel == Message.OWNER && bookIsCheckedOutByThisUser(parcel.book)){
-            System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has been recalled. Please return by: " + parcel.message);
+            System.out.println("[Email to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has been recalled. Please return by: " + parcel.message);
         }
 
         if(parcel == Message.NOT_OWNER && parcel.book.isCheckedIn())
-            System.out.println("[Message to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has become available! Pick it up ASAP!");
+            System.out.println("[SMS to ID " + getProperty(UserData.ID) + "]Book with magic number and copy number " + parcel.book.getFullCode() + " has become available! Pick it up ASAP!");
 
     }
 

@@ -36,7 +36,7 @@ public class checkOutTask extends Task {
             System.out.println("Book is currently checked out.");
             return false;
         }
-
+        System.out.println("Due date: ");
         currentUser.checkOutBook(checkOut);
         Date dueDate = checkOut.checkOut(today, Integer.parseInt(currentUser.getProperty(UserData.Return_Time_Limit).toString()));
         if (dueDate != null) {

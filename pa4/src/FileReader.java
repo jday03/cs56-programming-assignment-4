@@ -188,6 +188,7 @@ public class FileReader {
             Date dueDate = new Date (checkOutDate);
             dueDate.changeDate(previousUser.bookReturnTimeLimit);
             foundBook.setDueDate(dueDate);
+            foundBook.addWatcher(previousUser);
             previousUser.checkOutBook(foundBook);
 
             int test = line.length(); //16

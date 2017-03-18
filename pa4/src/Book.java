@@ -44,6 +44,9 @@ public class Book extends Observable{
             checkOutDate = new Date(currentDate);
             dueDate = new Date(checkOutDate);
             dueDate.changeDate(lengthOfCheckOut);
+            Message parcel = Message.NOT_OWNER;
+            parcel.book = this;
+            notifyObservers(parcel);
             return dueDate;
         }
     }
@@ -60,6 +63,7 @@ public class Book extends Observable{
             Message parcel = Message.OWNER;
             parcel.book = this;
             parcel.message = dueDate.stringForm();
+            setChanged();
             notifyObservers(parcel);
 
             return true;
