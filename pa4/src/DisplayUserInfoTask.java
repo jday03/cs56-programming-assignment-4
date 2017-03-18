@@ -23,7 +23,9 @@ public class DisplayUserInfoTask extends Task {
     if(checkedOutBooks.size() == 0)
         System.out.println("You currently don't have any books checked out.");
     else{
+        System.out.println("You have checked out these books:");
         for(Book book: checkedOutBooks){
+
             book.printBookData();
             System.out.println("copy number: " + book.getClassification(BookClassification.Copy_Number));
             System.out.println("Book is due on: ");

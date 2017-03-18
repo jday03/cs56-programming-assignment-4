@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 
 
@@ -25,17 +26,26 @@ public class Library {
 
 
     public void runSession(){
-        Session start = new Session();
-        Task currentTask = start.beginSessionLogin(userList, bookCatalog);
-        updateBlocks(start.getDate());
 
-        while(!(currentTask.executeTask(userList,bookCatalog) == null)){
+        String nextLine;
+        do {
+
+            Session start = new Session();
+            Task currentTask = start.beginSessionLogin(userList, bookCatalog);
+            updateBlocks(start.getDate());
+
+            while (!(currentTask.executeTask(userList, bookCatalog) == null)) {
 
             currentTask = start.getNextTask();
 
-        }
+            }
 
-        System.out.println("----- SESSION HAS BEEN CLOSED -----");
+            System.out.println("Would you like to exit the program now? (y/n)" );
+            Scanner scan = new Scanner(System.in);
+            nextLine = scan.nextLine();
+        }while(nextLine.equals("n"));
+
+        System.out.println("----- Library HAS BEEN CLOSED -----");
     }
 
 

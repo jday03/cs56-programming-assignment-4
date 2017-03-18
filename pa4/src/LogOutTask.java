@@ -10,6 +10,8 @@ public class LogOutTask extends Task {
     }
 
     public Boolean executeTask(HashMap<String, User> Users, ArrayList<Book> bookCatalog) {
+        System.out.println("----- SESSION HAS ENDED-----");
+
         return null;
     }
 

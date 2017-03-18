@@ -13,6 +13,7 @@ public class checkInTask extends Task{
         Book checkIn = getBook(bookCatalog);
 
         if(!(currentUser.bookIsCheckedOutByThisUser(checkIn))){
+            System.out.println("Error: You don't have that book checked in.");
             return false;
         }
         checkIn.checkIn();

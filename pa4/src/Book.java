@@ -85,7 +85,11 @@ public class Book extends Observable{
     public boolean checkIn(){
         checkOutDate = null;
         dueDate = null;
-        notifyObservers(getFullCode());
+        setChanged();
+        Message parcel = Message.NOT_OWNER;
+        parcel.book = this;
+        setChanged();
+        notifyObservers(parcel);
         return true;
     }
 
