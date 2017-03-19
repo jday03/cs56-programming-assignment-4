@@ -1,3 +1,5 @@
+package ProgAssignment4;
+
 import java.util.HashMap;
 import java.util.Observable;
 

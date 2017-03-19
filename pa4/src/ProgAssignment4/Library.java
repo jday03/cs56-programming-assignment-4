@@ -1,3 +1,5 @@
+package ProgAssignment4;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -8,8 +10,8 @@ import java.util.Set;
  * Created by JonathanDay4 on 3/13/2017.
  */
 public class Library {
-    HashMap<String,User> userList = new HashMap<String,User>(10);
-    ArrayList< Book> bookCatalog = new ArrayList<Book>(10);
+   private HashMap<String,User> userList = new HashMap<String,User>(10);
+   private ArrayList< Book> bookCatalog = new ArrayList<Book>(10);
 
 
 

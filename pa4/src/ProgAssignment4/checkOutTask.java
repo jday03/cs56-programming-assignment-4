@@ -1,7 +1,7 @@
-import java.lang.reflect.Array;
+package ProgAssignment4;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * Created by JonathanDay4 on 3/16/2017.

@@ -1,3 +1,5 @@
+package ProgAssignment4;
+
 import static java.lang.Character.toLowerCase;
 
 /**

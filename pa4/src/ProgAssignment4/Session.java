@@ -1,8 +1,7 @@
-import com.sun.xml.internal.bind.v2.model.core.ID;
+package ProgAssignment4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observer;
 import java.util.Scanner;
 
 /**
