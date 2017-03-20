@@ -11,7 +11,7 @@ public class LibrarySystem {
 
     public static void main(String [] args){
 
-        Library test = new Library("Library.data");
+        Library test = new Library("ProgAssignment4/Library.data");
         test.runSession();
     }
 }

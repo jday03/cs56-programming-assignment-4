@@ -13,7 +13,6 @@ public class RecallTask extends WaitTask {
 
 
 
-
     @Override
     public Boolean executeTask(HashMap<String,User> Users, ArrayList<Book> bookCatalog){
         ArrayList <Book> books= getBooks(bookCatalog);

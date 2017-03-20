@@ -193,7 +193,7 @@ public class FileReader {
             foundBook.addWatcher(previousUser);
             previousUser.checkOutBook(foundBook);
 
-            int test = line.length(); //16
+            int test = line.length();
 
         } while (separationBetweenMagicNumbers != line.length());
 
